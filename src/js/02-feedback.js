@@ -2,17 +2,39 @@ import throttle from 'lodash.throttle';
 import '../css/common.css';
 import '../css/feedback-form.css';
 
+
+const STORAGE_KEY = 'feedback-msg'
+const STORAGE_NAME = 'feedback-name'
+
+const formData = {
+    name: '',
+    message: ''
+}
 // console.log(localStorage)
 
 const refs = {
     form: document.querySelector('.js-feedback-form'),
-    textarea: document.querySelector('.js-feedback-form textarea')
+    textarea: document.querySelector('.js-feedback-form textarea'),
+    nameinput: document.querySelector('.js-feedback-form input')
 }
 
+
 refs.form.addEventListener('submit', onFormSubmit)
-refs.textarea.addEventListener('input', throttle(onTextAreaInput, 1000) )
+// refs.textarea.addEventListener('input', throttle(onTextAreaInput, 1000) )
+// refs.form.addEventListener('input', onFormData)
+// refs.nameinput.addEventListener('input', onNameData)
+
 
 populateTextarea()
+populateName()
+
+function onFormData (e) {
+    // console.log(e.target.name)
+    formData[e.target.name] = e.target.value
+    console.log(formData)
+}
+
+
 /*
  * - Останавливаем поведение по умолчанию
  * - Убираем сообщение из хранилища
@@ -21,8 +43,9 @@ populateTextarea()
 
 function onFormSubmit(evt) {
     evt.preventDefault();
-    // console.log('Sending form')
     evt.currentTarget.reset()
+    localStorage.removeItem("formData")
+    // console.log('Sending form')
 }
 
 /*
@@ -31,25 +54,37 @@ function onFormSubmit(evt) {
  * - Можно добавить throttle
  */
 
-function onTextAreaInput(evt) {
-    const message = evt.target.value;
-    localStorage.setItem('feedback-msg', message)
-    // console.log(message)
-}
+// function onNameData(evt) {
+//     const name = evt.target.value
+//     localStorage.setItem(STORAGE_NAME, name)
+// }
+
+// function onTextAreaInput(evt) {
+//     const message = evt.target.value;
+//     localStorage.setItem(STORAGE_KEY, message)
+//     // console.log(message)
+// }
 
 /*
  * - Получаем значение из хранилища
  * - Если там что-то было, обновляем DOM
  */
 
-function populateTextarea() {
-    const savedMessage = localStorage.getItem('feedback-msg')
-    if(savedMessage) {
-        console.log(savedMessage)
-        refs.textarea.value = savedMessage
-   }
-} 
+// function populateTextarea() {
+//     const savedMessage = localStorage.getItem(STORAGE_KEY)
+//     if(savedMessage) {
+//         // console.log(savedMessage)
+//         refs.textarea.value = savedMessage
+//    }
+// } 
 
+// function populateName() {
+//     const savedName = localStorage.getItem(STORAGE_NAME)
+//     if(savedName) {
+//         // console.log(savedName)
+//         refs.nameinput.value = savedName
+//     }
+// }
 
 
 // Домой
@@ -57,11 +92,25 @@ function populateTextarea() {
 
 // const formData = {};
 
-// refs.form.addEventListener('input', e => {
-//   // console.log(e.target.name);
-//   // console.log(e.target.value);
+refs.form.addEventListener('input', evt => {
+//   console.log(evt.target.name);
+//   console.log(evt.target.value);
+  formData[evt.target.name] = evt.target.value
+  window.localStorage.setItem("formData", JSON.stringify(formData))
+});
 
-//   formData[e.target.name] = e.target.value;
+function populateTextarea() {
+    const savedMessage = window.localStorage.getItem("formData")
+    const parsedMessage = JSON.parse(savedMessage)
+    if(parsedMessage) {
+        refs.textarea.value = parsedMessage.message
+   }
+} 
 
-//   console.log(formData);
-// });
+function populateName() {
+    const savedName = window.localStorage.getItem("formData")
+    const parsedName = JSON.parse(savedName)
+    if(parsedName) {
+        refs.nameinput.value = parsedName.name
+    }
+}
