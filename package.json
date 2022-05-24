@@ -1,0 +1,28 @@
+{
+  "name": "goit-js-module_8.3_parcel_repeta",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/*.html",
+    "build": "parcel build src/*.html --public-url /goit-js-module_8.3_parcel_repeta-.git/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreyHerzhov/goit-js-module_8.3_parcel_repeta-.git"
+  },
+  "keywords": [],
+  "author": "Abdrey Herzhov <andreyherzhov@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreyHerzhov/goit-js-module_8.3_parcel_repeta-/issues"
+  },
+  "homepage": "https://github.com/AndreyHerzhov/goit-js-module_8.3_parcel_repeta-#readme",
+  "dependencies": {
+    "lodash.throttle": "^4.1.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-handlebars-precompile": "^1.0.2"
+  }
+}
