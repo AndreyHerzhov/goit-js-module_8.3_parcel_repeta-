@@ -20,9 +20,9 @@ const refs = {
 
 
 refs.form.addEventListener('submit', onFormSubmit)
-// refs.textarea.addEventListener('input', throttle(onTextAreaInput, 1000) )
-// refs.form.addEventListener('input', onFormData)
-// refs.nameinput.addEventListener('input', onNameData)
+refs.textarea.addEventListener('input', throttle(onTextAreaInput, 1000) )
+refs.form.addEventListener('input', onFormData)
+refs.nameinput.addEventListener('input', onNameData)
 
 
 populateTextarea()
@@ -54,37 +54,37 @@ function onFormSubmit(evt) {
  * - Можно добавить throttle
  */
 
-// function onNameData(evt) {
-//     const name = evt.target.value
-//     localStorage.setItem(STORAGE_NAME, name)
-// }
+function onNameData(evt) {
+    const name = evt.target.value
+    localStorage.setItem(STORAGE_NAME, name)
+}
 
-// function onTextAreaInput(evt) {
-//     const message = evt.target.value;
-//     localStorage.setItem(STORAGE_KEY, message)
-//     // console.log(message)
-// }
+function onTextAreaInput(evt) {
+    const message = evt.target.value;
+    localStorage.setItem(STORAGE_KEY, message)
+    // console.log(message)
+}
 
 /*
  * - Получаем значение из хранилища
  * - Если там что-то было, обновляем DOM
  */
 
-// function populateTextarea() {
-//     const savedMessage = localStorage.getItem(STORAGE_KEY)
-//     if(savedMessage) {
-//         // console.log(savedMessage)
-//         refs.textarea.value = savedMessage
-//    }
-// } 
+function populateTextarea() {
+    const savedMessage = localStorage.getItem(STORAGE_KEY)
+    if(savedMessage) {
+        // console.log(savedMessage)
+        refs.textarea.value = savedMessage
+   }
+} 
 
-// function populateName() {
-//     const savedName = localStorage.getItem(STORAGE_NAME)
-//     if(savedName) {
-//         // console.log(savedName)
-//         refs.nameinput.value = savedName
-//     }
-// }
+function populateName() {
+    const savedName = localStorage.getItem(STORAGE_NAME)
+    if(savedName) {
+        // console.log(savedName)
+        refs.nameinput.value = savedName
+    }
+}
 
 
 // Домой
@@ -92,25 +92,25 @@ function onFormSubmit(evt) {
 
 // const formData = {};
 
-refs.form.addEventListener('input', evt => {
-//   console.log(evt.target.name);
-//   console.log(evt.target.value);
-  formData[evt.target.name] = evt.target.value
-  window.localStorage.setItem("formData", JSON.stringify(formData))
-});
+// refs.form.addEventListener('input', evt => {
+// //   console.log(evt.target.name);
+// //   console.log(evt.target.value);
+//   formData[evt.target.name] = evt.target.value
+//   window.localStorage.setItem("formData", JSON.stringify(formData))
+// });
 
-function populateTextarea() {
-    const savedMessage = window.localStorage.getItem("formData")
-    const parsedMessage = JSON.parse(savedMessage)
-    if(parsedMessage) {
-        refs.textarea.value = parsedMessage.message
-   }
-} 
+// function populateTextarea() {
+//     const savedMessage = window.localStorage.getItem("formData")
+//     const parsedMessage = JSON.parse(savedMessage)
+//     if(parsedMessage) {
+//         refs.textarea.value = parsedMessage.message
+//    }
+// } 
 
-function populateName() {
-    const savedName = window.localStorage.getItem("formData")
-    const parsedName = JSON.parse(savedName)
-    if(parsedName) {
-        refs.nameinput.value = parsedName.name
-    }
-}
+// function populateName() {
+//     const savedName = window.localStorage.getItem("formData")
+//     const parsedName = JSON.parse(savedName)
+//     if(parsedName) {
+//         refs.nameinput.value = parsedName.name
+//     }
+// }
